@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elevra 360° Growth Diagnosis — Leadership Cleaning Service</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0D12;
+  --bg-2:#0D1117;
+  --panel:#12161D;
+  --panel-2:#171C24;
+  --panel-3:#1D232C;
+  --line:rgba(255,255,255,0.09);
+  --line-2:rgba(255,255,255,0.15);
+  --text:#EDEFF2;
+  --text-dim:#9AA3AF;
+  --text-faint:#5C6570;
+  --accent:#1FE7AC;
+  --accent-dim:rgba(31,231,172,0.14);
+  --gold:#D4AF37;
+  --gold-dim:rgba(212,175,55,0.14);
+  --coral:#FF6B5B;
+  --coral-dim:rgba(255,107,91,0.14);
+  --blue:#5B8CFF;
+  --blue-dim:rgba(91,140,255,0.14);
+  --violet:#B98CFF;
+  --violet-dim:rgba(185,140,255,0.14);
+  --measure:#5B8CFF; --control:#1FE7AC; --convert:#D4AF37; --retain:#B98CFF; --scale:#FF6B5B;
+  --radius:14px;
+  --serif-disp:'Space Grotesk',sans-serif;
+  --body:'Inter',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background:
+    radial-gradient(ellipse 900px 500px at 8% -10%, rgba(31,231,172,0.07), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 10%, rgba(212,175,55,0.05), transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+#deck{
+  height:100vh; height:100dvh;
+  width:100%;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+  position:relative;
+  z-index:1;
+}
+.slide{
+  min-height:100vh; min-height:100dvh;
+  width:100%;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+  padding:clamp(28px,6vw,88px) clamp(24px,7vw,110px);
+  border-bottom:1px solid var(--line);
+  background:var(--bg);
+}
+.slide-inner{ width:100%; max-width:1360px; margin:0 auto; position:relative; z-index:2;}
+/* ===== chrome ===== */
+.wordmark{
+  position:fixed; top:22px; left:clamp(20px,4vw,44px); z-index:50;
+  font-family:var(--serif-disp); font-weight:700; font-size:14px; letter-spacing:0.14em;
+  color:var(--text-dim); text-transform:uppercase; pointer-events:none;
+  display:flex; align-items:center; gap:8px;
+}
+.wordmark .dot{width:6px;height:6px;border-radius:50%;background:var(--accent); box-shadow:0 0 10px var(--accent);}
+.topbar{position:fixed; top:0; left:0; right:0; height:3px; z-index:60; background:rgba(255,255,255,0.06);}
+.topbar-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--measure),var(--control),var(--convert),var(--retain),var(--scale)); transition:width .25s ease;}
+.counter{
+  position:fixed; right:clamp(20px,4vw,44px); bottom:22px; z-index:50;
+  font-family:var(--mono); font-size:12px; color:var(--text-faint); letter-spacing:0.05em;
+}
+.counter b{color:var(--text-dim);}
+.dotnav{position:fixed; right:22px; top:50%; transform:translateY(-50%); z-index:50; display:flex; flex-direction:column; gap:6px;}
+.dotnav button{width:6px; height:6px; border-radius:50%; border:none; background:rgba(255,255,255,0.18); cursor:pointer; padding:0; transition:all .25s;}
+.dotnav button.active{background:var(--accent); height:16px; box-shadow:0 0 8px var(--accent);}
+.arrows{position:fixed; right:clamp(20px,4vw,44px); bottom:52px; z-index:50; display:flex; gap:8px;}
+.arrows button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line-2); background:var(--panel); color:var(--text-dim); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:13px;}
+.arrows button:hover{color:var(--accent); border-color:var(--accent);}
+/* ===== typography helpers ===== */
+.kicker{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--text-faint); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+}
+.kicker .num{color:var(--text-dim);}
+.phase-chip{
+  display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:10.5px;
+  letter-spacing:0.12em; text-transform:uppercase; padding:5px 10px; border-radius:100px;
+  border:1px solid var(--line-2); color:var(--text-dim);
+}
+.phase-chip .dotc{width:6px;height:6px;border-radius:50%;}
+h1.disp{font-family:var(--serif-disp); font-weight:700; line-height:1.04; letter-spacing:-0.01em; color:var(--text);}
+h2.disp{font-family:var(--serif-disp); font-weight:700; line-height:1.08; letter-spacing:-0.01em; color:var(--text);}
+.t-huge{font-size:clamp(32px,5.4vw,64px);}
+.t-xl{font-size:clamp(26px,4vw,44px);}
+.t-lg{font-size:clamp(21px,2.9vw,31px);}
+.sub{color:var(--text-dim); font-size:clamp(14.5px,1.4vw,17px); line-height:1.6; max-width:760px; font-weight:400;}
+.lede{color:var(--text-dim); font-size:clamp(15px,1.5vw,18px); line-height:1.65; max-width:820px;}
+.accent-txt{color:var(--accent);}
+.gold-txt{color:var(--gold);}
+.coral-txt{color:var(--coral);}
+.mono-tag{font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-faint);}
+.divider{height:1px; background:var(--line); width:100%; margin:26px 0;}
+.badge-warn{
+  display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px;
+  letter-spacing:0.06em; color:var(--gold); background:var(--gold-dim); border:1px solid rgba(212,175,55,0.35);
+  padding:6px 12px; border-radius:6px; margin-top:14px;
+}
+/* ===== layout helpers ===== */
+.grid-2{display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,48px);}
+.grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,2vw,22px);}
+.grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(12px,1.6vw,18px);}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:clamp(16px,2vw,24px);}
+.card:hover{border-color:var(--line-2);}
+.card h4{font-family:var(--serif-disp); font-size:16px; font-weight:600; margin-bottom:8px;}
+.card p{color:var(--text-dim); font-size:13.5px; line-height:1.55;}
+.pill{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:12px; padding:8px 14px; border-radius:100px; background:var(--panel-2); border:1px solid var(--line); color:var(--text);}
+.arrow-down{color:var(--text-faint); font-size:14px; text-align:center; margin:2px 0;}
+/* ===== flows ===== */
+.flow-v{display:flex; flex-direction:column; gap:0; align-items:flex-start; width:100%;}
+.flow-v .fnode{width:100%;}
+.flow-h{display:flex; align-items:center; gap:0; flex-wrap:wrap;}
+.fchip{
+  font-family:var(--mono); font-size:12px; padding:9px 16px; border-radius:8px; background:var(--panel-2);
+  border:1px solid var(--line); color:var(--text-dim); white-space:nowrap;
+}
+.fchip.on{color:var(--bg); background:var(--accent); border-color:var(--accent); font-weight:600;}
+.farrow{color:var(--text-faint); font-size:13px; padding:0 8px;}
+.flow-chain{display:flex; align-items:center; flex-wrap:wrap; gap:0; row-gap:10px;}
+/* scorecard */
+.score-row{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:9px 0; border-bottom:1px solid var(--line);}
+.score-row:last-child{border-bottom:none;}
+.score-label{font-size:13.5px; color:var(--text); font-weight:500;}
+.score-meter{display:flex; gap:3px;}
+.score-meter i{width:16px; height:6px; border-radius:2px; background:rgba(255,255,255,0.1); display:block;}
+.score-meter i.fill{background:var(--accent);}
+.score-group{margin-bottom:22px;}
+.score-group h5{font-family:var(--mono); font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faint); margin-bottom:6px;}
+/* matrix */
+.matrix{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:14px;}
+.mquad{border-radius:var(--radius); border:1px solid var(--line); padding:18px 20px; background:var(--panel);}
+.mquad h5{font-family:var(--serif-disp); font-size:15px; margin-bottom:10px;}
+.mquad ul{list-style:none;}
+.mquad li{font-size:13px; color:var(--text-dim); padding:4px 0; padding-left:14px; position:relative;}
+.mquad li::before{content:'—'; position:absolute; left:0; color:var(--text-faint);}
+/* compare */
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:2px; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);}
+.compare-col{padding:22px 24px; background:var(--panel);}
+.compare-col.after{background:linear-gradient(180deg, rgba(31,231,172,0.06), transparent);}
+.compare-col h5{font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:14px;}
+.compare-col.before h5{color:var(--text-faint);}
+.compare-col.after h5{color:var(--accent);}
+.compare-col ul{list-style:none;}
+.compare-col li{font-size:13.5px; padding:6px 0; color:var(--text-dim);}
+.compare-col.after li{color:var(--text);}
+.compare-col li::before{content:'○ '; color:var(--text-faint);}
+.compare-col.after li::before{content:'● '; color:var(--accent);}
+/* stat */
+.stat-big{font-family:var(--serif-disp); font-weight:700; font-size:clamp(40px,6vw,72px); line-height:1;}
+.leak-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
+.leak-card{border:1px solid rgba(255,107,91,0.25); background:rgba(255,107,91,0.05); border-radius:12px; padding:14px 16px;}
+.leak-card h5{font-family:var(--mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--coral); margin-bottom:6px;}
+.leak-card p{font-size:12.5px; color:var(--text-dim); line-height:1.5;}
+/* timeline */
+.tline{display:flex; gap:0; position:relative; padding-top:10px;}
+.tline::before{content:''; position:absolute; top:16px; left:0; right:0; height:1px; background:var(--line);}
+.tpoint{flex:1; position:relative; padding:0 10px; text-align:left;}
+.tpoint .dotm{width:9px;height:9px;border-radius:50%; background:var(--accent); position:relative; z-index:2; margin-bottom:14px;}
+.tpoint h6{font-family:var(--mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--text); margin-bottom:6px;}
+.tpoint p{font-size:12.5px; color:var(--text-dim); line-height:1.5;}
+/* footer note */
+.foot-note{margin-top:20px; font-family:var(--mono); font-size:11px; color:var(--text-faint); letter-spacing:0.02em;}
+.section-lbl{font-family:var(--serif-disp); font-weight:600; font-size:14px; color:var(--text); margin-bottom:14px; display:flex; align-items:center; gap:8px;}
+.section-lbl .n{width:22px; height:22px; border-radius:50%; border:1px solid var(--line-2); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:10px; color:var(--text-dim);}
+/* cover */
+.cover-wrap{display:flex; flex-direction:column; height:100%; justify-content:center;}
+.cover-brand{font-family:var(--mono); font-size:12px; letter-spacing:0.2em; color:var(--text-faint); text-transform:uppercase; margin-bottom:34px;}
+.cover-title{font-family:var(--serif-disp); font-weight:700; font-size:clamp(36px,6.8vw,86px); line-height:1.03; letter-spacing:-0.015em;}
+.cover-sub{margin-top:26px; font-size:clamp(15px,1.6vw,19px); color:var(--text-dim); max-width:660px; line-height:1.6;}
+.cover-meta{margin-top:56px; display:flex; gap:40px; flex-wrap:wrap;}
+.cover-meta div{font-family:var(--mono); font-size:11.5px; color:var(--text-faint);}
+.cover-meta div b{display:block; color:var(--text); font-size:13.5px; font-weight:500; margin-top:4px; font-family:var(--body);}
+/* dashboard mock */
+.dash{border:1px solid var(--line); border-radius:var(--radius); background:var(--panel); overflow:hidden;}
+.dash-head{display:flex; justify-content:space-between; align-items:center; padding:12px 18px; border-bottom:1px solid var(--line); background:var(--panel-2);}
+.dash-head span{font-family:var(--mono); font-size:11px; color:var(--text-faint); letter-spacing:0.08em; text-transform:uppercase;}
+.dash-grid{display:grid; grid-template-columns:repeat(5,1fr);}
+.dash-col{padding:16px 14px; border-right:1px solid var(--line);}
+.dash-col:last-child{border-right:none;}
+.dash-col h6{font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-faint); margin-bottom:10px;}
+.dash-col ul{list-style:none;}
+.dash-col li{font-size:12px; color:var(--text-dim); padding:4px 0; border-top:1px dashed var(--line);}
+.dash-col li:first-child{border-top:none;}
+/* radar/architecture band */
+.arch{display:flex; flex-direction:column; gap:0; position:relative;}
+.arch-band{display:grid; grid-template-columns:160px 1fr; gap:20px; align-items:center; padding:16px 0; position:relative;}
+.arch-band + .arch-band{border-top:1px dashed var(--line);}
+.arch-label{font-family:var(--serif-disp); font-weight:600; font-size:15px; color:var(--text); display:flex; align-items:center; gap:10px;}
+.arch-label .idx{font-family:var(--mono); font-size:11px; color:var(--text-faint);}
+.arch-chips{display:flex; flex-wrap:wrap; gap:8px;}
+.arch-chips span{font-family:var(--mono); font-size:11.5px; padding:6px 12px; border-radius:6px; background:var(--panel-2); border:1px solid var(--line); color:var(--text-dim);}
+/* offer arch */
+.offer-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+.offer-card{border-radius:12px; border:1px solid var(--line); padding:16px; background:var(--panel);}
+.offer-card .tag{font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;}
+.offer-card h5{font-family:var(--serif-disp); font-size:15px; margin-bottom:6px;}
+.offer-card p{font-size:12px; color:var(--text-dim); line-height:1.5;}
+/* flywheel */
+.wheel-wrap{display:flex; align-items:center; justify-content:center; gap:clamp(20px,4vw,60px); flex-wrap:wrap;}
+.wheel{width:min(46vw,380px); height:min(46vw,380px); position:relative;}
+.wheel svg{width:100%; height:100%; animation:spin 60s linear infinite;}
+@keyframes spin{from{transform:rotate(0)} to{transform:rotate(360deg)}}
+.wheel-center{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center;}
+.wheel-center b{font-family:var(--serif-disp); font-size:14px;}
+.wheel-center span{font-family:var(--mono); font-size:9.5px; color:var(--text-faint); letter-spacing:0.1em;}
+@media (prefers-reduced-motion: reduce){ .wheel svg{animation:none;} }
+/* responsive */
+@media (max-width:900px){
+  .dotnav{display:none;}
+  .grid-2{grid-template-columns:1fr; gap:26px;}
+  .grid-3{grid-template-columns:1fr;}
+  .grid-4{grid-template-columns:1fr 1fr;}
+  .leak-grid{grid-template-columns:1fr 1fr;}
+  .matrix{grid-template-columns:1fr; grid-template-rows:auto;}
+  .compare{grid-template-columns:1fr;}
+  .offer-grid{grid-template-columns:1fr 1fr;}
+  .dash-grid{grid-template-columns:1fr 1fr;}
+  .dash-col{border-right:none; border-bottom:1px solid var(--line);}
+  .tline{flex-direction:column; gap:16px;}
+  .tline::before{display:none;}
+  .arch-band{grid-template-columns:1fr; gap:8px;}
+  .cover-meta{gap:22px;}
+  .slide{padding:88px 22px 70px;}
+}
+@media (max-width:560px){
+  .grid-4{grid-template-columns:1fr;}
+  .leak-grid{grid-template-columns:1fr;}
+  .offer-grid{grid-template-columns:1fr;}
+  .dash-grid{grid-template-columns:1fr;}
+  .arrows{bottom:70px;}
+  .counter{bottom:76px;}
+}
+::-webkit-scrollbar{width:0;}
+</style>
+</head>
+<body>
+
+<div class="wordmark"><span class="dot"></span> ELEVRA DIGITAL</div>
+<div class="topbar"><div class="topbar-fill" id="topbarFill"></div></div>
+<div class="counter"><b id="curNum">01</b> / <span id="totNum">32</span></div>
+<div class="arrows"><button id="prevBtn" aria-label="Slide anterior">↑</button><button id="nextBtn" aria-label="Próximo slide">↓</button></div>
+<div class="dotnav" id="dotnav"></div>
+
+<main id="deck"></main>
+
+<script>
+/* ============ COMPONENT HELPERS ============ */
+const PHASES = {
+  measure:{c:'var(--measure)', l:'Medir'},
+  control:{c:'var(--control)', l:'Controlar'},
+  convert:{c:'var(--convert)', l:'Converter'},
+  retain:{c:'var(--retain)', l:'Reter'},
+  scale:{c:'var(--scale)', l:'Escalar'},
+  none:{c:'var(--text-faint)', l:'Diagnóstico'}
+};
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
+
+function flowChain(container, steps, opts={}){
+  const wrap = el('div','flow-chain');
+  steps.forEach((s,i)=>{
+    const chip = el('div','fchip'+(opts.highlight&&opts.highlight.includes(i)?' on':''), s);
+    wrap.appendChild(chip);
+    if(i<steps.length-1){ wrap.appendChild(el('span','farrow','→')); }
+  });
+  container.appendChild(wrap);
+}
+
+function cardsGrid(container, cards, colClass='grid-3'){
+  const wrap = el('div',colClass);
+  cards.forEach(c=>{
+    const card = el('div','card');
+    card.innerHTML = `<h4>${c.t}</h4><p>${c.d}</p>`;
+    wrap.appendChild(card);
+  });
+  container.appendChild(wrap);
+}
+
+function leakGrid(container, leaks){
+  const wrap = el('div','leak-grid');
+  leaks.forEach(l=>{
+    const c = el('div','leak-card');
+    c.innerHTML = `<h5>${l.t}</h5><p>${l.d}</p>`;
+    wrap.appendChild(c);
+  });
+  container.appendChild(wrap);
+}
+
+function scoreCard(container, groups){
+  groups.forEach(g=>{
+    const gwrap = el('div','score-group');
+    gwrap.appendChild(el('h5','', g.name));
+    g.items.forEach(it=>{
+      const row = el('div','score-row');
+      let meter = '';
+      for(let i=1;i<=5;i++){ meter += `<i class="${i<=it.s?'fill':''}"></i>`; }
+      row.innerHTML = `<span class="score-label">${it.l}</span><span class="score-meter">${meter}</span>`;
+      gwrap.appendChild(row);
+    });
+    container.appendChild(gwrap);
+  });
+}
+
+function matrixQuad(container, quads){
+  const wrap = el('div','matrix');
+  quads.forEach(q=>{
+    const qd = el('div','mquad');
+    qd.innerHTML = `<h5>${q.t}</h5><ul>${q.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+    wrap.appendChild(qd);
+  });
+  container.appendChild(wrap);
+}
+
+function compareBlock(container, beforeItems, afterItems, beforeLabel='ANTES', afterLabel='DEPOIS'){
+  const wrap = el('div','compare');
+  const b = el('div','compare-col before');
+  b.innerHTML = `<h5>${beforeLabel}</h5><ul>${beforeItems.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+  const a = el('div','compare-col after');
+  a.innerHTML = `<h5>${afterLabel}</h5><ul>${afterItems.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+  wrap.appendChild(b); wrap.appendChild(a);
+  container.appendChild(wrap);
+}
+
+function timelineBlock(container, points){
+  const wrap = el('div','tline');
+  points.forEach(p=>{
+    const tp = el('div','tpoint');
+    tp.innerHTML = `<div class="dotm"></div><h6>${p.t}</h6><p>${p.d}</p>`;
+    wrap.appendChild(tp);
+  });
+  container.appendChild(wrap);
+}
+
+function archBlock(container, bands){
+  const wrap = el('div','arch');
+  bands.forEach((b,i)=>{
+    const band = el('div','arch-band');
+    band.innerHTML = `<div class="arch-label"><span class="idx">0${i+1}</span>${b.t}</div><div class="arch-chips">${b.items.map(x=>`<span>${x}</span>`).join('')}</div>`;
+    wrap.appendChild(band);
+  });
+  container.appendChild(wrap);
+}
+
+function offerGrid(container, offers){
+  const wrap = el('div','offer-grid');
+  offers.forEach(o=>{
+    const c = el('div','offer-card');
+    c.innerHTML = `<div class="tag">${o.tag}</div><h5>${o.t}</h5><p>${o.d}</p>`;
+    wrap.appendChild(c);
+  });
+  container.appendChild(wrap);
+}
+
+function dashMock(container, cols){
+  const d = el('div','dash');
+  d.innerHTML = `<div class="dash-head"><span>Elevra Revenue Dashboard — Visão Executiva</span><span>Ao vivo / Onboarding</span></div>`;
+  const grid = el('div','dash-grid');
+  cols.forEach(c=>{
+    const col = el('div','dash-col');
+    col.innerHTML = `<h6>${c.t}</h6><ul>${c.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+    grid.appendChild(col);
+  });
+  d.appendChild(grid);
+  container.appendChild(d);
+}
+
+function pillRow(container, items){
+  const wrap = el('div','flow-h');
+  items.forEach(i=>wrap.appendChild(el('span','pill', i)));
+  container.appendChild(wrap);
+}
+
+/* header builder used inside each slide body */
+function head(container, num, kicker, phaseKey, title, sub){
+  const k = el('div','kicker');
+  const ph = PHASES[phaseKey]||PHASES.none;
+  k.innerHTML = `<span class="num">${String(num).padStart(2,'0')} —</span> ${kicker} <span class="phase-chip" style="margin-left:10px;"><span class="dotc" style="background:${ph.c}"></span>${ph.l}</span>`;
+  container.appendChild(k);
+  container.appendChild(el('h2','disp t-xl', title));
+  if(sub) container.appendChild(el('p','sub', sub));
+}
+
+/* ============ SLIDE DATA ============ */
+const slides = [];
+
+/* 01 — CAPA */
+slides.push({phase:'none', kicker:'', build:(b)=>{
+  b.classList.add('cover-wrap');
+  b.innerHTML = `
+    <div class="cover-brand">Elevra Digital · Digital Growth Studio</div>
+    <div class="cover-title">Diagnóstico de<br>Crescimento 360°.</div>
+    <div class="cover-sub">Uma avaliação de infraestrutura de crescimento de receita e uma estratégia de execução para 90 dias — preparada para <b style="color:var(--text)">Leadership Cleaning Service</b>, Margate, Flórida.</div>
+    <div class="cover-meta">
+      <div>PREPARADO POR<b>Elevra Digital</b></div>
+      <div>PREPARADO PARA<b>Andre Oliveira — Proprietário</b></div>
+      <div>ESCOPO<b>Growth · RevOps · Automação com IA</b></div>
+      <div>STATUS<b>Diagnóstico Confidencial</b></div>
+    </div>`;
+}});
+
+/* 02 — SOBRE ESTE DIAGNÓSTICO + SNAPSHOT */
+slides.push({phase:'measure', kicker:'Sobre Este Diagnóstico', build:(b,i)=>{
+  head(b,i,'Sobre Este Diagnóstico','measure','Isto não é uma proposta de marketing. É uma auditoria de sistemas de receita.','A Elevra analisou a Leadership Cleaning Service da forma como uma consultoria de growth, uma equipe de revenue operations e uma prática de CRO/automação com IA analisariam — não como um pacote de social media, anúncios e site. Cada achado abaixo é construído estritamente a partir dos dados fornecidos pela empresa.');
+  const grid = el('div','grid-2'); grid.style.marginTop='30px';
+  const left = el('div');
+  left.appendChild(el('div','section-lbl','<span class="n">A</span>Snapshot da Empresa'));
+  const rows = [
+    ['Empresa','Leadership Cleaning Service'],
+    ['Proprietário / Contato','Andre Oliveira'],
+    ['Localização','Margate, Flórida'],
+    ['Site','leadershipcleaningservice.com'],
+    ['Instagram','@Leadership_cleaningservice'],
+    ['Tamanho da Equipe','2–5 colaboradores'],
+    ['Receita Anual Estimada','US$ 100 mil – US$ 500 mil'],
+  ];
+  let tbl = '<div style="border:1px solid var(--line); border-radius:12px; overflow:hidden;">';
+  rows.forEach((r,idx)=>{ tbl += `<div style="display:flex; justify-content:space-between; padding:10px 16px; ${idx? 'border-top:1px solid var(--line);':''} font-size:13.5px;"><span style="color:var(--text-faint); font-family:var(--mono); font-size:11.5px;">${r[0].toUpperCase()}</span><span style="color:var(--text); text-align:right;">${r[1]}</span></div>`; });
+  tbl += '</div>';
+  left.innerHTML += tbl;
+  const right = el('div');
+  right.appendChild(el('div','section-lbl','<span class="n">B</span>Realidade Operacional Atual'));
+  cardsGrid(right, [
+    {t:'Aquisição', d:'Redes sociais e indicações geram a maior parte da demanda. Google Ads e Meta Ads estão ativos, mas não são medidos em relação à receita.'},
+    {t:'Sistemas', d:'Sem CRM, sem software de gestão do negócio, sem fluxos assistidos por IA. Agendamento, faturamento e atendimento são manuais.'},
+    {t:'Gargalo', d:'Velocidade de resposta e conversão de leads são os principais desafios reportados — não a falta de demanda.'},
+    {t:'Visão de 12 Meses', d:'Dobrar a receita e reduzir a dependência manual do proprietário, conforme definido diretamente pela liderança.'},
+  ],'grid-2');
+  right.style.marginTop='14px';
+  grid.appendChild(left); grid.appendChild(right);
+  b.appendChild(grid);
+}});
+
+/* 03 — TESE CENTRAL */
+slides.push({phase:'none', kicker:'A Tese Central', build:(b,i)=>{
+  head(b,i,'A Tese Central','none','A Leadership Cleaning Service não precisa simplesmente de mais leads.');
+  const wrap = el('div'); wrap.style.marginTop='10px';
+  wrap.innerHTML = `<h2 class="disp t-lg gold-txt" style="max-width:900px;">Ela precisa de um sistema mensurável, automatizado e repetível, capaz de converter demanda em receita previsível.</h2>`;
+  b.appendChild(wrap);
+  const g = el('div','grid-2'); g.style.marginTop='40px';
+  const cur = el('div'); cur.appendChild(el('div','section-lbl','<span class="n">→</span>Estado Atual'));
+  flowVertical(cur, ['Empresa familiar','Proprietário envolvido diretamente na operação','Atendimento e agendamento manuais','Sem CRM · Sem IA','Rastreamento limitado','Volume de leads limitado','Desafios de conversão','Crescimento limitado pela capacidade do proprietário']);
+  const fut = el('div'); fut.appendChild(el('div','section-lbl','<span class="n">→</span>Estado Futuro'));
+  flowVertical(fut, ['Aquisição previsível','CRM centralizado','Resposta rápida · qualificação automatizada','Agendamento automatizado','Follow-up estruturado','Conversão mais alta','Receita recorrente · inteligência de receita','Operação escalável e independente do proprietário'], true);
+  g.appendChild(cur); g.appendChild(fut);
+  b.appendChild(g);
+}});
+function flowVertical(container, items, accent){
+  const wrap = el('div','flow-v');
+  items.forEach((it,idx)=>{
+    const row = el('div','fnode');
+    row.style.cssText='display:flex; align-items:center; gap:12px; padding:8px 0;';
+    row.innerHTML = `<span style="width:6px;height:6px;border-radius:50%;background:${accent?'var(--accent)':'var(--text-faint)'}; flex-shrink:0;"></span><span style="font-size:13.5px; color:${accent?'var(--text)':'var(--text-dim)'};">${it}</span>`;
+    wrap.appendChild(row);
+    if(idx<items.length-1) wrap.appendChild(el('div','arrow-down','↓'));
+  });
+  container.appendChild(wrap);
+}
+
+/* 04 — DESCOBERTA CRÍTICA */
+slides.push({phase:'measure', kicker:'Descoberta Crítica', build:(b,i)=>{
+  head(b,i,'Descoberta Crítica','measure','O Gap Entre Leads e Vendas.','Uma inconsistência relevante aparece nos dados fornecidos — e, em vez de suavizá-la, a Elevra a trata como o primeiro achado estratégico.');
+  const g = el('div','grid-2'); g.style.marginTop='24px'; g.style.alignItems='center';
+  const left = el('div');
+  left.innerHTML = `
+    <div style="display:flex; gap:26px; align-items:flex-end; margin-bottom:10px;">
+      <div><div class="stat-big coral-txt">0–10</div><div class="mono-tag">Leads reportados / mês</div></div>
+      <div style="font-family:var(--serif-disp); font-size:28px; color:var(--text-faint);">vs</div>
+      <div><div class="stat-big accent-txt">6–20</div><div class="mono-tag">Vendas reportadas / mês</div></div>
+    </div>
+    <p class="lede" style="margin-top:18px;">O volume de vendas reportado supera — ou se iguala — ao volume de leads reportado. Estruturalmente, isso não deveria acontecer, a menos que leads estejam sendo gerados e convertidos por canais que a empresa hoje não classifica ou rastreia como "leads".</p>
+    <div class="badge-warn">⚠ Validação de dados necessária no onboarding</div>
+  `;
+  const right = el('div'); right.appendChild(el('div','section-lbl','<span class="n">?</span>Hipóteses de Trabalho'));
+  cardsGrid(right, [
+    {t:'Ponto Cego das Indicações', d:'Indicações podem estar virando trabalho fechado sem nunca entrar como registro de "lead".'},
+    {t:'Clientes Recorrentes', d:'Clientes que retornam podem estar sendo registrados como venda, sem serem reclassificados como novo lead.'},
+    {t:'Contatos Offline', d:'Ligações, mensagens e solicitações presenciais podem não estar sendo registradas em nenhum sistema.'},
+    {t:'Sem Definição Compartilhada', d:'"Lead" e "venda" podem não estar definidos de forma consistente entre os canais.'},
+  ],'grid-2');
+  right.style.marginTop='16px';
+  g.appendChild(left); g.appendChild(right);
+  b.appendChild(g);
+  const concl = el('div'); concl.style.marginTop='30px';
+  concl.innerHTML = `<h2 class="disp t-lg">Antes de escalar, <span class="accent-txt">precisamos dos números reais.</span></h2>`;
+  b.appendChild(concl);
+}});
+
+/* 05 — PRINCÍPIO ESTRATÉGICO */
+slides.push({phase:'none', kicker:'Princípio Estratégico', build:(b,i)=>{
+  head(b,i,'Princípio Estratégico','none','Não escalamos tráfego antes de corrigir o sistema que converte tráfego em receita.');
+  const row = el('div'); row.style.cssText='margin-top:40px; display:flex; gap:0; flex-wrap:wrap; align-items:center;';
+  const seq = [['01','Medir','measure'],['02','Controlar','control'],['03','Converter','convert'],['04','Reter','retain'],['05','Escalar','scale']];
+  seq.forEach((s,idx)=>{
+    const c = el('div');
+    c.style.cssText='flex:1; min-width:130px; text-align:left; padding:20px 18px; border:1px solid var(--line); border-radius:12px; background:var(--panel); margin-right:10px; margin-bottom:10px;';
+    c.style.borderTop = `2px solid ${PHASES[s[2]].c}`;
+    c.innerHTML = `<div class="mono-tag" style="margin-bottom:10px;">${s[0]}</div><div style="font-family:var(--serif-disp); font-weight:600; font-size:19px;">${s[1]}</div>`;
+    row.appendChild(c);
+    if(idx<seq.length-1){ const ar = el('span','','→'); ar.style.cssText='color:var(--text-faint); font-size:18px; margin:0 2px 10px;'; row.appendChild(ar); }
+  });
+  b.appendChild(row);
+  b.appendChild(el('p','lede', 'Essa sequência nunca é invertida. Aumentar o investimento em Google Ads ou Meta Ads antes de controlar o sistema de conversão apenas amplia o volume que passa pelos mesmos vazamentos.'));
+  b.lastChild.style.marginTop='26px';
+}});
+
+/* 06 — SUMÁRIO EXECUTIVO */
+slides.push({phase:'measure', kicker:'Sumário Executivo', build:(b,i)=>{
+  head(b,i,'Sumário Executivo','measure','Quatro achados definem o diagnóstico.');
+  const g = el('div','grid-2'); g.style.marginTop='24px'; g.style.rowGap='24px';
+  const items = [
+    ['01','A demanda existe — a previsibilidade não.','A empresa já vende, tem clientes e gera negócio por meio de redes sociais, indicações e mídia paga — mas a aquisição não está integrada a uma infraestrutura centralizada de rastreamento de receita.'],
+    ['02','O maior vazamento pode estar entre o lead e o agendamento.','O próprio diagnóstico aponta conversão de leads, velocidade de resposta e agendamento como os principais pontos de atrito.'],
+    ['03','O negócio ainda depende do proprietário.','O crescimento é limitado não só pelo marketing, mas pela capacidade operacional de uma única pessoa.'],
+    ['04','Existe uma oportunidade clara de construir um motor de crescimento.','Marketing, CRM, automação, conversão, retenção e analytics podem se combinar em um único sistema operacional previsível.'],
+  ];
+  items.forEach(it=>{
+    const c = el('div','card');
+    c.innerHTML = `<div class="mono-tag" style="margin-bottom:10px;">ACHADO ${it[0]}</div><h4 style="font-size:18px; margin-bottom:10px;">${it[1]}</h4><p>${it[2]}</p>`;
+    g.appendChild(c);
+  });
+  b.appendChild(g);
+}});
+
+/* 07 — AVALIAÇÃO 360 */
+slides.push({phase:'measure', kicker:'Avaliação Preliminar Elevra 360°', build:(b,i)=>{
+  head(b,i,'Avaliação Preliminar Elevra 360°','measure','Onde a empresa provavelmente está hoje — de forma direcional.');
+  const grid = el('div','grid-3'); grid.style.marginTop='22px';
+  const g1 = el('div'); scoreCard(g1,[{name:'Marketing & Presença', items:[{l:'Posicionamento de Marca',s:2},{l:'Google Ads',s:3},{l:'Meta Ads',s:3},{l:'Social Orgânico',s:2},{l:'SEO Local',s:1},{l:'Perfil da Empresa no Google',s:2}]}]);
+  const g2 = el('div'); scoreCard(g2,[{name:'Conversão & Vendas', items:[{l:'Conversão do Site',s:2},{l:'Geração de Leads',s:2},{l:'Resposta a Leads',s:2},{l:'Processo de Vendas',s:2},{l:'Agendamento',s:1}]}]);
+  const g3 = el('div'); scoreCard(g3,[{name:'Sistemas & Crescimento', items:[{l:'CRM',s:1},{l:'Automação',s:1},{l:'Retenção de Clientes',s:2},{l:'Motor de Indicações',s:2},{l:'Analytics / Atribuição',s:1},{l:'Escalabilidade Operacional',s:1}]}]);
+  grid.appendChild(g1); grid.appendChild(g2); grid.appendChild(g3);
+  b.appendChild(grid);
+  b.appendChild(el('div','badge-warn','⚠ Avaliação Preliminar Elevra — acesso às plataformas necessário para validação completa'));
+}});
+
+/* 08 — FUNIL REAL */
+slides.push({phase:'measure', kicker:'O Funil Real', build:(b,i)=>{
+  head(b,i,'O Funil Real','measure','Doze etapas separam um estranho de um cliente recorrente.');
+  const c = el('div'); c.style.marginTop='30px';
+  flowChain(c, ['Tráfego','Lead','Resposta','Qualificação','Orçamento','Agendamento','Serviço','Pagamento','Avaliação','Recompra','Indicação','Reativação'], {highlight:[2,4,5]});
+  b.appendChild(c);
+  b.appendChild(el('p','lede','Resposta → Orçamento → Agendamento é a zona prioritária de investigação: é onde o atrito reportado (velocidade e conversão) se concentra.'));
+  b.lastChild.style.marginTop='24px';
+}});
+
+/* 09 — MAPA DE VAZAMENTOS */
+slides.push({phase:'measure', kicker:'Mapa de Vazamentos de Receita', build:(b,i)=>{
+  head(b,i,'Mapa de Vazamentos de Receita','measure','Nove pontos onde a receita provavelmente está deixando a empresa.');
+  const c = el('div'); c.style.marginTop='24px';
+  leakGrid(c, [
+    {t:'Vazamento de Aquisição', d:'Anúncios e canais sem atribuição completa até a receita.'},
+    {t:'Vazamento de Resposta', d:'Leads que não recebem atenção rápida e estruturada.'},
+    {t:'Vazamento de Follow-Up', d:'Interesse demonstrado, mas sem sequência consistente.'},
+    {t:'Vazamento de Orçamento', d:'Estimativas enviadas e nunca acompanhadas sistematicamente.'},
+    {t:'Vazamento de Agendamento', d:'Agendamento depende inteiramente de coordenação manual.'},
+    {t:'Vazamento de No-Show / Cancelamento', d:'Sem confirmações ou lembretes estruturados.'},
+    {t:'Vazamento de Upsell', d:'Serviços adicionais não são oferecidos sistematicamente.'},
+    {t:'Vazamento de Retenção', d:'Clientes antigos não têm estratégia estruturada de recompra.'},
+    {t:'Vazamento de Indicação', d:'Clientes satisfeitos não são convertidos sistematicamente em indicações.'},
+  ]);
+  b.appendChild(c);
+}});
+
+/* 10 — BASELINE */
+slides.push({phase:'measure', kicker:'Baseline Antes do Crescimento', build:(b,i)=>{
+  head(b,i,'Baseline Antes do Crescimento','measure','O que não conseguimos medir, não conseguimos melhorar sistematicamente.');
+  const c = el('div'); c.style.marginTop='24px';
+  pillRow(c, ['Leads','Origem do Lead','Tempo de 1ª Resposta','Taxa de Contato','Taxa de Qualificação','Taxa de Orçamento','Taxa de Agendamento','Taxa de Conclusão','Ticket Médio','Receita','Receita / Lead','Taxa de Recompra','Taxa de Indicação','Custo / Lead','Custo / Job Agendado','Custo / Job Concluído']);
+  b.appendChild(c);
+  b.appendChild(el('div','badge-warn','⚠ Dado necessário durante o onboarding'));
+}});
+
+/* 11 — ARQUITETURA DE RECEITA */
+slides.push({phase:'control', kicker:'Arquitetura de Receita Elevra', build:(b,i)=>{
+  head(b,i,'Arquitetura de Receita Elevra','control','O sistema que a Elevra propõe construir.');
+  const c = el('div'); c.style.marginTop='22px';
+  archBlock(c, [
+    {t:'Demanda', items:['Google','Meta','Social','SEO','Perfil da Empresa no Google','Indicações','Parceiros']},
+    {t:'Captura', items:['Site','Landing Pages','Formulários','Telefone','Chat','DM']},
+    {t:'Conversão', items:['CRM','Resposta com IA','Qualificação','Orçamento','Follow-Up','Agendamento']},
+    {t:'Entrega', items:['Confirmação','Serviço','Comunicação','Pagamento']},
+    {t:'Expansão', items:['Avaliação','Upsell','Recorrência','Indicação','Reativação']},
+    {t:'Inteligência', items:['Rastreamento','Atribuição','Dashboard','Otimização']},
+  ]);
+  b.appendChild(c);
+}});
+
+/* 12 — SPEED TO LEAD */
+slides.push({phase:'control', kicker:'Velocidade de Resposta', build:(b,i)=>{
+  head(b,i,'Velocidade de Resposta','control','Cada minuto importa.','Serviços locais costumam ter alta intenção de compra — o mesmo cliente muito provavelmente está falando com mais de uma empresa ao mesmo tempo. Quem responde primeiro fecha estruturalmente mais negócios, independentemente do investimento em anúncios.');
+  const c = el('div'); c.style.marginTop='30px';
+  flowChain(c, ['Novo Lead','Resposta Imediata','Qualificação','Orçamento / Próximo Passo','Disponibilidade','Agendamento','Confirmação'], {highlight:[1]});
+  b.appendChild(c);
+  b.appendChild(el('p','lede','Objetivo: o mínimo possível de intervenção manual entre a chegada do lead e a primeira resposta relevante.'));
+  b.lastChild.style.marginTop='22px';
+}});
+
+/* 13 — AI FRONT DESK */
+slides.push({phase:'control', kicker:'Recepção com IA', build:(b,i)=>{
+  head(b,i,'Recepção Assistida por IA 24/7','control','A IA cuida da repetição. As pessoas cuidam das exceções e dos relacionamentos.');
+  const c = el('div'); c.style.marginTop='22px';
+  pillRow(c, ['Resposta Inicial','Perguntas Frequentes','Identificação do Serviço','CEP','Tipo e Tamanho do Imóvel','Data Desejada','Qualificação Básica','Solicitação de Fotos','Disponibilidade','Agendamento','Confirmação','Lembrete','Follow-Up','Escalonamento para Humano']);
+  b.appendChild(c);
+  const n = el('p','lede','Posicionada como um reforço, não uma substituição — a recepção com IA absorve o atendimento inicial repetitivo e sensível ao tempo, para que a equipe foque em orçamentos, qualidade do serviço e relacionamento.');
+  n.style.marginTop='22px'; b.appendChild(n);
+}});
+
+/* 14 — PIPELINE DE CRM */
+slides.push({phase:'control', kicker:'Pipeline de CRM', build:(b,i)=>{
+  head(b,i,'Pipeline de CRM','control','Um caminho estruturado do primeiro contato até a indicação.');
+  const c = el('div'); c.style.marginTop='24px';
+  flowChain(c, ['Novo Lead','Contatado','Qualificado','Orçamento Enviado','Follow-Up','Agendamento Solicitado','Agendamento Confirmado','Serviço Concluído','Pagamento Pendente','Pago','Avaliação Solicitada','Cliente Recorrente','Indicação'], {});
+  b.appendChild(c);
+  const s = el('div'); s.style.marginTop='24px';
+  s.appendChild(el('div','section-lbl','<span class="n">⊘</span>Segmentos de Exceção'));
+  pillRow(s, ['Sem Resposta','Lead Perdido','Orçamento Não Aceito','Cancelado','No-Show','Cliente Antigo','Cliente de Alto Valor']);
+  b.appendChild(s);
+}});
+
+/* 15 — NUNCA PERCA UM LEAD */
+slides.push({phase:'control', kicker:'Nunca Perca um Lead', build:(b,i)=>{
+  head(b,i,'Nunca Perca um Lead','control','Leads não devem desaparecer porque a equipe ficou ocupada.');
+  const g = el('div','grid-2'); g.style.marginTop='22px';
+  const left = el('div');
+  left.appendChild(el('div','section-lbl','<span class="n">A</span>Motor de Follow-Up'));
+  timelineBlock(left, [
+    {t:'Imediato', d:'Resposta inicial'},
+    {t:'+5–15 min', d:'Follow-up, se aplicável'},
+    {t:'Mesmo Dia', d:'Segunda tentativa'},
+    {t:'24 Horas', d:'Follow-up'},
+    {t:'48–72 Horas', d:'Follow-up + CTA'},
+  ]);
+  const fn = el('p','foot-note','Os intervalos finais serão ajustados após observar o comportamento real de resposta.'); fn.style.marginTop='16px'; left.appendChild(fn);
+  const right = el('div');
+  right.appendChild(el('div','section-lbl','<span class="n">B</span>Recuperação de Chamada Perdida'));
+  flowVertical(right, ['Chamada Perdida','Resposta Automática por SMS','Identificação do Cliente','Solicitação de Serviço','Qualificação','Agendamento / Retorno Humano'], true);
+  g.appendChild(left); g.appendChild(right);
+  b.appendChild(g);
+}});
+
+/* 16 — MODELAGEM DE IMPACTO EM RECEITA */
+slides.push({phase:'convert', kicker:'Modelagem de Impacto em Receita', build:(b,i)=>{
+  head(b,i,'Conversão Antes de Aquisição','convert','Mais receita nem sempre exige mais leads.');
+  const note = el('div','foot-note','Cenário ilustrativo — não são dados reais da Leadership Cleaning Service.'); note.style.marginBottom='16px'; b.appendChild(note);
+  const g = el('div','grid-2');
+  const cur = el('div','card');
+  cur.innerHTML = `<div class="mono-tag" style="margin-bottom:10px;">SISTEMA ATUAL — EXEMPLO</div>
+    <div style="font-size:13.5px; color:var(--text-dim); line-height:2;">100 Leads → 70 Contatados → 40 Orçamentos → 20 Agendamentos<br>Ticket Médio de US$ 300</div>
+    <div class="stat-big" style="margin-top:14px;">US$ 6.000</div>`;
+  const opt = el('div','card'); opt.style.borderColor='rgba(31,231,172,0.35)';
+  opt.innerHTML = `<div class="mono-tag accent-txt" style="margin-bottom:10px;">SISTEMA OTIMIZADO — EXEMPLO</div>
+    <div style="font-size:13.5px; color:var(--text-dim); line-height:2;">Mesmos 100 Leads → 85 Contatados → 55 Orçamentos → 35 Agendamentos<br>Ticket Médio de US$ 350</div>
+    <div class="stat-big accent-txt" style="margin-top:14px;">US$ 12.250</div>`;
+  g.appendChild(cur); g.appendChild(opt); b.appendChild(g);
+  const formula = el('div'); formula.style.marginTop='28px';
+  formula.appendChild(el('div','section-lbl','<span class="n">Σ</span>Fórmula de Receita'));
+  const fc = el('div'); fc.style.cssText='font-family:var(--mono); font-size:13px; color:var(--text-dim); line-height:2;';
+  fc.innerHTML = 'Leads × Taxa de Contato × Taxa de Agendamento × Ticket Médio = <span style="color:var(--text)">Receita de Novos Clientes</span><br>+ Recompra + Upsell + Indicação = <span class="accent-txt">Receita Total</span>';
+  formula.appendChild(fc);
+  b.appendChild(formula);
+}});
+
+/* 17 — SITE */
+slides.push({phase:'convert', kicker:'Site Como Ativo de Vendas', build:(b,i)=>{
+  head(b,i,'Seu Site Deveria Vender 24 Horas por Dia.','convert','Reduzir a distância entre a intenção e o agendamento.');
+  const c = el('div'); c.style.marginTop='22px';
+  pillRow(c, ['Primeira Dobra','Proposta de Valor','CTA','UX Mobile','Clique para Ligar','Solicitar Orçamento','Agendamento','Serviços','Áreas de Atendimento','Depoimentos e Avaliações','Antes / Depois','Sinais de Confiança','FAQ','Chat com IA','Velocidade da Página','Rastreamento e Eventos de Conversão','Pixels de Retargeting']);
+  b.appendChild(c);
+}});
+
+/* 18 — MÍDIA PAGA */
+slides.push({phase:'convert', kicker:'Motor de Mídia Paga', build:(b,i)=>{
+  head(b,i,'Google + Meta, Cada um com Seu Papel','convert','Captura de alta intenção no Google. Construção de confiança e demanda no Meta.');
+  const g = el('div','grid-2'); g.style.marginTop='22px';
+  const goog = el('div');
+  goog.appendChild(el('div','section-lbl','<span class="n">G</span>Motor de Crescimento Google'));
+  cardsGrid(goog, [
+    {t:'Estrutura de Busca', d:'Campanhas por serviço, palavras-chave de alta intenção, segmentação geográfica, palavras negativas.'},
+    {t:'Rastreamento', d:'Rastreamento de chamadas e conversões conectado às etapas do CRM, não apenas a cliques.'},
+    {t:'Sinais Locais', d:'Perfil da Empresa no Google, visibilidade em busca local, avaliações e elegibilidade para Local Services Ads, quando aplicável.'},
+  ],'grid-3'); goog.querySelector('.grid-3').style.gridTemplateColumns='1fr'; goog.querySelector('.grid-3').style.gap='10px';
+  const meta = el('div');
+  meta.appendChild(el('div','section-lbl','<span class="n">M</span>Motor de Crescimento Meta'));
+  const mc = el('div'); mc.style.marginTop='6px';
+  flowVertical(mc, ['Atenção — antes/depois, transformações, vídeo, conteúdo educativo','Confiança — depoimentos, avaliações, prova social, bastidores','Oferta — oferta de entrada, oferta sazonal, combo','Retargeting — visitantes do site, usuários engajados, públicos qualificados','Conversão — CRM, follow-up, agendamento'], true);
+  meta.appendChild(mc);
+  g.appendChild(goog); g.appendChild(meta);
+  b.appendChild(g);
+  const n = el('p','foot-note','Nenhum valor de CPL, CPC ou ROAS é assumido — todas as métricas base são estabelecidas durante o onboarding.'); n.style.marginTop='18px'; b.appendChild(n);
+}});
+
+/* 19 — SEO LOCAL + GBP */
+slides.push({phase:'convert', kicker:'SEO Local + Perfil da Empresa no Google', build:(b,i)=>{
+  head(b,i,'O Canal Local Ainda Não Explorado','convert','SEO foi reportado como inexistente — isso é uma oportunidade, não uma deficiência.');
+  const c = el('div'); c.style.marginTop='22px';
+  pillRow(c, ['Otimização do Perfil da Empresa','Avaliações','Categorias e Serviços','Fotos e Posts','Citações Locais','Consistência de NAP','Páginas de Serviço','Páginas por Cidade','Palavras-Chave Locais','Links Internos','Marcação Schema','SEO Técnico']);
+  b.appendChild(c);
+  const n = el('div'); n.style.marginTop='22px';
+  n.appendChild(el('div','section-lbl','<span class="n">→</span>Critérios de Expansão Geográfica'));
+  pillRow(n, ['Demanda','Concorrência','Ticket Médio','Distância','Margem','Capacidade Operacional']);
+  b.appendChild(n);
+  b.appendChild(el('p','foot-note','A expansão além das áreas de atendimento confirmadas só será considerada com base nesses critérios — nunca por suposição.'));
+  b.lastChild.style.marginTop='16px';
+}});
+
+/* 20 — ARQUITETURA DE OFERTAS */
+slides.push({phase:'convert', kicker:'Arquitetura de Ofertas', build:(b,i)=>{
+  head(b,i,'Além do "Ligue Para Limpeza."','convert','Um conjunto estruturado de ofertas para cada etapa do relacionamento com o cliente.');
+  const c = el('div'); c.style.marginTop='22px';
+  offerGrid(c, [
+    {tag:'Aquisição', t:'Oferta de Entrada', d:'Desenhada para atrair novos clientes com baixo atrito.'},
+    {tag:'Valor', t:'Combo', d:'Combinação de serviços que aumenta o ticket médio.'},
+    {tag:'Previsibilidade', t:'Plano Recorrente', d:'Relacionamento de serviço agendado e repetido.'},
+    {tag:'Margem', t:'Premium', d:'Solução de ticket mais alto para clientes de maior valor.'},
+    {tag:'Retenção', t:'Reativação', d:'Oferta estruturada para clientes antigos.'},
+    {tag:'Crescimento', t:'Indicação', d:'Incentivo para aquisição via cliente.'},
+    {tag:'Sazonalidade', t:'Sazonal', d:'Alinhada aos padrões de demanda sazonal.'},
+  ]);
+  b.appendChild(c);
+  b.appendChild(el('p','foot-note','Nenhuma estrutura de desconto é proposta aqui — a estratégia de preço é definida em conjunto com a liderança.'));
+  b.lastChild.style.marginTop='16px';
+}});
+
+/* 21 — MOTOR DE EXPANSÃO DE RECEITA */
+slides.push({phase:'retain', kicker:'Motor de Expansão de Receita', build:(b,i)=>{
+  head(b,i,'Um Cliente Deveria Gerar Mais de Uma Transação.','retain');
+  const c = el('div'); c.style.marginTop='24px';
+  flowChain(c, ['Cliente Adquirido','Primeiro Serviço','Upsell','Serviço Recorrente','Avaliação','Indicação','Reativação'], {});
+  b.appendChild(c);
+  const g = el('div'); g.style.marginTop='30px';
+  g.appendChild(el('div','section-lbl','<span class="n">%</span>Mix Potencial de Receita'));
+  pillRow(g, ['Residencial Avulso','Residencial Recorrente','Contratos Comerciais','Upsells','Indicações','Reativação']);
+  b.appendChild(g);
+  b.appendChild(el('h2','disp t-lg', 'Receita mais previsível.'));
+  b.lastChild.style.marginTop='16px'; b.lastChild.style.color='var(--accent)';
+}});
+
+/* 22 — EXPANSÃO B2B */
+slides.push({phase:'scale', kicker:'Expansão B2B / Parcerias', build:(b,i)=>{
+  head(b,i,'Oportunidades a Validar — Não a Assumir','scale','Depois que a operação residencial se estabiliza, relacionamentos B2B estruturados passam a valer a pena testar.');
+  const c = el('div'); c.style.marginTop='22px';
+  pillRow(c, ['Gestores de Propriedades','Corretores de Imóveis','Escritórios','Condomínios / HOAs','Operadores de Aluguel por Temporada','Parcerias de Mudança (Move-In/Move-Out)','Empreiteiras','Contas Comerciais','Parceiros de Indicação']);
+  b.appendChild(c);
+  const n = el('div'); n.style.marginTop='22px';
+  n.appendChild(el('div','section-lbl','<span class="n">✓</span>Critérios de Validação'));
+  pillRow(n, ['Margem','Ticket','Frequência','Distância','Custo de Aquisição','Complexidade Operacional','Condições de Pagamento']);
+  b.appendChild(n);
+}});
+
+/* 23 — MOTOR DE AVALIAÇÕES E INDICAÇÕES */
+slides.push({phase:'retain', kicker:'Motor de Avaliações e Indicações', build:(b,i)=>{
+  head(b,i,'O Serviço Gera Avaliações. As Avaliações Geram Demanda.','retain');
+  const g = el('div','grid-2'); g.style.marginTop='22px';
+  const left = el('div'); left.appendChild(el('div','section-lbl','<span class="n">★</span>Motor de Avaliações'));
+  flowVertical(left, ['Serviço Concluído','Checagem de Satisfação','Solicitação de Avaliação','Avaliação no Google','Maior Autoridade Local e Confiança','Mais Conversão'], true);
+  const right = el('div'); right.appendChild(el('div','section-lbl','<span class="n">→</span>Motor de Indicações'));
+  flowVertical(right, ['Cliente Satisfeito','Solicitação de Indicação','Amigo / Família / Empresa','Novo Cliente','Serviço','Nova Indicação'], true);
+  g.appendChild(left); g.appendChild(right);
+  b.appendChild(g);
+  b.appendChild(el('p','lede','O objetivo é transformar o boca a boca informal em um sistema estruturado e repetível.'));
+  b.lastChild.style.marginTop='20px';
+}});
+
+/* 24 — DEPENDÊNCIA DO PROPRIETÁRIO */
+slides.push({phase:'scale', kicker:'Dependência do Proprietário', build:(b,i)=>{
+  head(b,i,'O Proprietário Deveria Gerenciar o Sistema — Não Ser o Sistema.','scale');
+  compareBlock(b,
+    ['Proprietário = Operador','Vendas','Atendimento ao Cliente','Despachante','Agendamento','Solucionador de Problemas','Tomador de decisão em cada tarefa'],
+    ['Sistemas + Equipe + Automação + Dashboard','Proprietário = Estratégia','Proprietário = Liderança','Proprietário = Controle Financeiro','Proprietário = Crescimento'],
+    'HOJE — GARGALO NO PROPRIETÁRIO','FUTURO — PROPRIETÁRIO LIDERA O SISTEMA'
+  );
+  b.querySelector('.compare').style.marginTop='26px';
+}});
+
+/* 25 — NORTH STAR + DASHBOARD */
+slides.push({phase:'measure', kicker:'Métrica Norteadora', build:(b,i)=>{
+  head(b,i,'Receita Concluída e Recebida','measure','Não seguidores. Não impressões. Não o número bruto de leads.');
+  const c = el('div'); c.style.marginTop='20px';
+  flowChain(c, ['Lead','Job Agendado','Job Concluído','Pagamento','Receita'], {highlight:[4]});
+  b.appendChild(c);
+  const dwrap = el('div'); dwrap.style.marginTop='26px';
+  dashMock(dwrap, [
+    {t:'Aquisição', items:['Leads','CPL','Origem','Desempenho por Canal']},
+    {t:'Vendas', items:['Tempo de Resposta','Taxa de Contato','Taxa de Orçamento','Taxa de Agendamento']},
+    {t:'Operações', items:['Agendamentos','Jobs Concluídos','Taxa de Cancelamento','Taxa de No-Show']},
+    {t:'Cliente', items:['Clientes Recorrentes','Avaliações','Indicações','Reativações']},
+    {t:'Financeiro', items:['Receita','Ticket Médio','CAC','Receita Recorrente']},
+  ]);
+  b.appendChild(dwrap);
+  b.appendChild(el('div','badge-warn','⚠ Dado necessário durante o onboarding'));
+}});
+
+/* 26 — PLANO DE 90 DIAS */
+slides.push({phase:'none', kicker:'Plano de Execução de 90 Dias', build:(b,i)=>{
+  head(b,i,'Três Fases. Uma Sequência.','none');
+  const g = el('div','grid-3'); g.style.marginTop='22px';
+  const phases = [
+    {n:'Dias 1–30', t:'Controlar', goal:'Estancar os vazamentos.', color:'control', items:['Validar volume de leads e vendas','Definir lead / venda','Auditoria de rastreamento, anúncios e site','Implementação de CRM + pipeline','Rastreamento de chamadas e formulários','Fluxo de velocidade de resposta','Recuperação de chamada perdida','Automação de agendamento e follow-up','Baseline do dashboard']},
+    {n:'Dias 31–60', t:'Converter', goal:'Transformar a demanda existente em mais receita.', color:'convert', items:['Otimização de landing page e site (CRO)','Otimização do processo de vendas e orçamento','Otimização de agendamento','Sequências de follow-up e retargeting','Ofertas, combos, upsells','Automação de avaliações e indicações','Recuperação de leads perdidos','Reativação de clientes antigos','Testes de criativos']},
+    {n:'Dias 61–90', t:'Escalar', goal:'Escalar o sistema comprovado.', color:'scale', items:['Escalar Google e campanhas Meta vencedoras','Expansão geográfica e de SEO','Expansão de ofertas e conteúdo','Crescimento de receita recorrente','Aquisição de parcerias e B2B','Otimização dos fluxos de IA','Previsão de receita','Otimização de processos da equipe']},
+  ];
+  phases.forEach(p=>{
+    const c = el('div','card'); c.style.borderTop = `2px solid var(--${p.color})`;
+    c.innerHTML = `<div class="mono-tag" style="margin-bottom:6px;">${p.n}</div><h4 style="font-size:20px; margin-bottom:6px;">${p.t}</h4><p style="color:var(--text); font-size:13px; margin-bottom:12px; font-style:italic;">${p.goal}</p><ul style="list-style:none;">${p.items.map(x=>`<li style="font-size:12.5px; color:var(--text-dim); padding:4px 0; padding-left:12px; position:relative;"><span style="position:absolute; left:0;">–</span>${x}</li>`).join('')}</ul>`;
+    g.appendChild(c);
+  });
+  b.appendChild(g);
+  b.appendChild(el('p','foot-note','A mídia paga não é escalada agressivamente entre os Dias 1–30 — o sistema é estabilizado primeiro.'));
+  b.lastChild.style.marginTop='16px';
+}});
+
+/* 27 — MATRIZ DE PRIORIDADES */
+slides.push({phase:'none', kicker:'Matriz de Prioridades', build:(b,i)=>{
+  head(b,i,'O Que é Corrigido Primeiro — e Por Quê','none');
+  const c = el('div'); c.style.marginTop='22px';
+  matrixQuad(c, [
+    {t:'Impacto Muito Alto · Imediato', items:['Validação de Dados','CRM','Rastreamento','Velocidade de Resposta','Agendamento','Follow-Up']},
+    {t:'Alto Impacto · Alta Prioridade', items:['CRO do Site','Otimização do Google','Avaliações','Ofertas','Retargeting']},
+    {t:'Alto Impacto · Médio Prazo', items:['SEO','Receita Recorrente','Motor de Indicações','Reativação','Parcerias']},
+    {t:'Escala', items:['Expansão Geográfica','Escala de Mídia Paga','Contas Comerciais','IA Avançada']},
+  ]);
+  b.appendChild(c);
+}});
+
+/* 28 — GROWTH FLYWHEEL */
+slides.push({phase:'retain', kicker:'Flywheel de Crescimento', build:(b,i)=>{
+  head(b,i,'O Crescimento Deveria Compor.','retain');
+  const wrap = el('div','wheel-wrap'); wrap.style.marginTop='16px';
+  const labels = ['Tráfego','Leads','Resposta Rápida','Agendamento','Ótimo Serviço','Avaliações','Mais Confiança','Mais Leads','Clientes Recorrentes','Indicações','Menor CAC','Mais Receita','Reinvestimento'];
+  const wheel = el('div','wheel');
+  const R=150,CX=190,CY=190;
+  let items='';
+  labels.forEach((l,idx)=>{
+    const ang = (idx/labels.length)*2*Math.PI - Math.PI/2;
+    const x = CX + R*Math.cos(ang), y = CY + R*Math.sin(ang);
+    items += `<circle cx="${x}" cy="${y}" r="4" fill="#1FE7AC"/>`;
+  });
+  let circle = `<circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1" stroke-dasharray="2 6"/>`;
+  wheel.innerHTML = `<svg viewBox="0 0 380 380">${circle}${items}</svg><div class="wheel-center"><b>Crescimento<br>Composto</b><span>FLYWHEEL ELEVRA</span></div>`;
+  const list = el('div'); list.style.cssText='max-width:420px;';
+  list.innerHTML = labels.map((l,idx)=>`<span style="display:inline-block; font-family:var(--mono); font-size:11.5px; color:var(--text-dim); background:var(--panel-2); border:1px solid var(--line); padding:6px 11px; border-radius:100px; margin:0 6px 8px 0;">${idx+1}. ${l}</span>`).join('');
+  wrap.appendChild(wheel); wrap.appendChild(list);
+  b.appendChild(wrap);
+}});
+
+/* 29 — GROWTH OS */
+slides.push({phase:'none', kicker:'Elevra Growth OS™', build:(b,i)=>{
+  head(b,i,'Elevra Growth OS™','none','A metodologia proprietária por trás de cada projeto.');
+  const c = el('div'); c.style.marginTop='20px';
+  archBlock(c, [
+    {t:'Atrair', items:['Mídia Paga','SEO','Social','Presença Local']},
+    {t:'Capturar', items:['Site','Landing Pages','Chamadas','Formulários','Chat']},
+    {t:'Converter', items:['CRM','IA','Velocidade de Resposta','Follow-Up','Agendamento']},
+    {t:'Entregar', items:['Serviço','Comunicação','Pagamento']},
+    {t:'Expandir', items:['Upsell','Recorrência','Indicação','Reativação']},
+    {t:'Medir', items:['Analytics','Atribuição','Dashboard']},
+    {t:'Otimizar', items:['Conversão','Ofertas','Campanhas','Processos']},
+    {t:'Escalar', items:['Orçamento','Geografia','Equipe','Automação']},
+  ]);
+  b.appendChild(c);
+}});
+
+/* 30 — ANTES / DEPOIS */
+slides.push({phase:'none', kicker:'Antes vs Depois', build:(b,i)=>{
+  head(b,i,'A Transformação, Por Completo','none');
+  compareBlock(b,
+    ['Processos manuais','Dependente do proprietário','Sem CRM · Sem IA','Agendamento manual','Rastreamento limitado','Marketing desconectado','Follow-up inconsistente','Atribuição limitada','Crescimento reativo'],
+    ['CRM centralizado','Resposta rápida e automatizada','Agendamento e follow-up automatizados','Aquisição e atribuição rastreadas','Motores de avaliação + indicação + reativação','Receita recorrente','Operações assistidas por IA','Dashboard de receita','Operação escalável e independente do proprietário'],
+    'ANTES','DEPOIS'
+  );
+  b.querySelector('.compare').style.marginTop='24px';
+}});
+
+/* 31 — VISÃO DE 12 MESES */
+slides.push({phase:'scale', kicker:'Visão de 12 Meses', build:(b,i)=>{
+  head(b,i,'Do Crescimento Manual a uma Operação Escalável.','scale');
+  const c = el('div'); c.style.marginTop='30px';
+  timelineBlock(c, [
+    {t:'Agora', d:'Empresa dependente do proprietário'},
+    {t:'90 Dias', d:'Sistema de receita sob controle'},
+    {t:'6 Meses', d:'Motor de crescimento otimizado'},
+    {t:'12 Meses', d:'Operação escalável e orientada por dados'},
+  ]);
+  b.appendChild(c);
+  b.appendChild(el('h2','disp t-lg gold-txt','Dobrar a receita sem dobrar o caos operacional.'));
+  b.lastChild.style.marginTop='26px';
+  b.appendChild(el('p','foot-note','Um objetivo estratégico, não uma garantia.'));
+  b.lastChild.style.marginTop='10px';
+}});
+
+/* 32 — MENSAGEM FINAL + PRÓXIMOS PASSOS */
+slides.push({phase:'scale', kicker:'Mensagem Final', build:(b,i)=>{
+  head(b,i,'Mensagem Final & Próximo Passo','scale');
+  const top = el('div'); top.style.marginTop='6px';
+  top.innerHTML = `<h1 class="disp t-huge">Mais leads não são<br>o objetivo final.</h1><h2 class="disp t-lg gold-txt" style="margin-top:8px;">Mais receita previsível é.</h2>
+  <p class="lede" style="margin-top:20px;">A Leadership Cleaning Service já sabe entregar o serviço. A próxima etapa é construir a infraestrutura que permite à empresa responder mais rápido, converter mais, reter clientes, gerar receita recorrente, medir performance, escalar a aquisição e reduzir a dependência do proprietário.</p>`;
+  b.appendChild(top);
+  const steps = el('div'); steps.style.marginTop='34px';
+  const seq = [['01','Acesso a Dados + Auditoria'],['02','Baseline + Rastreamento'],['03','CRM + Automação'],['04','Conversão + Aquisição'],['05','Escala + Otimização']];
+  const row = el('div'); row.style.cssText='display:flex; flex-wrap:wrap; gap:10px;';
+  seq.forEach(s=>{
+    const c = el('div'); c.style.cssText='flex:1; min-width:140px; border:1px solid var(--line); border-radius:10px; padding:14px 16px; background:var(--panel);';
+    c.innerHTML = `<div class="mono-tag" style="margin-bottom:6px;">${s[0]}</div><div style="font-family:var(--serif-disp); font-size:14px; font-weight:600;">${s[1]}</div>`;
+    row.appendChild(c);
+  });
+  steps.appendChild(row);
+  b.appendChild(steps);
+  const close = el('div'); close.style.marginTop='36px';
+  close.innerHTML = `<div class="divider"></div><div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;"><h2 class="disp t-lg">Do crescimento manual<br>ao crescimento previsível.</h2><div style="text-align:right;"><div style="font-family:var(--serif-disp); font-weight:700; font-size:18px;">Elevra Digital</div><div class="mono-tag">Dados. Automação. Performance. Crescimento Previsível.</div></div></div>`;
+  b.appendChild(close);
+}});
+
+/* ============ RENDER DECK ============ */
+const deck = document.getElementById('deck');
+const dotnav = document.getElementById('dotnav');
+document.getElementById('totNum').textContent = String(slides.length).padStart(2,'0');
+
+slides.forEach((s, idx)=>{
+  const sec = el('section','slide'); sec.id = 'slide-'+idx;
+  const inner = el('div','slide-inner');
+  sec.appendChild(inner);
+  s.build(inner, idx+1);
+  deck.appendChild(sec);
+  const dot = el('button'); dot.dataset.idx = idx; dot.title = (idx+1)+' / '+slides.length;
+  dot.addEventListener('click', ()=>document.getElementById('slide-'+idx).scrollIntoView({behavior:'smooth'}));
+  dotnav.appendChild(dot);
+});
+
+/* active tracking */
+let current = 0;
+const dots = Array.from(dotnav.children);
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && e.intersectionRatio>0.5){
+      const idx = Array.from(deck.children).indexOf(e.target);
+      current = idx;
+      dots.forEach(d=>d.classList.remove('active'));
+      if(dots[idx]) dots[idx].classList.add('active');
+      document.getElementById('curNum').textContent = String(idx+1).padStart(2,'0');
+      document.getElementById('topbarFill').style.width = ((idx+1)/slides.length*100)+'%';
+    }
+  });
+},{root:deck, threshold:[0.5]});
+Array.from(deck.children).forEach(c=>io.observe(c));
+
+function goTo(idx){
+  idx = Math.max(0, Math.min(slides.length-1, idx));
+  document.getElementById('slide-'+idx).scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('nextBtn').addEventListener('click', ()=>goTo(current+1));
+document.getElementById('prevBtn').addEventListener('click', ()=>goTo(current-1));
+window.addEventListener('keydown', (e)=>{
+  if(['ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); goTo(current+1); }
+  if(['ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); goTo(current-1); }
+  if(e.key==='Home'){ e.preventDefault(); goTo(0); }
+  if(e.key==='End'){ e.preventDefault(); goTo(slides.length-1); }
+});
+</script>
+</body>
+</html>
